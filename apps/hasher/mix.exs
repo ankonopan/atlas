@@ -1,9 +1,9 @@
-defmodule Blockchain.MixProject do
+defmodule Hasher.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :blockchain,
+      app: :hasher,
       version: "0.1.0",
       build_path: "../../_build",
       config_path: "../../config/config.exs",
@@ -18,17 +18,16 @@ defmodule Blockchain.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger, :mongodb],
-      mod: {Blockchain.Application, []}
+      extra_applications: [:poolboy],
+      mod: {Hasher.Pool, []}
     ]
   end
 
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:mongodb, ">= 0.0.0"},
-      {:poolboy, ">= 0.0.0"},
-      {:ex_doc, "~> 0.12"}
+      {:poolboy, "~> 1.5"},
+      {:poison, "~> 3.1"}
     ]
   end
 end

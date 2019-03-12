@@ -2,14 +2,14 @@ defmodule Blockchain.DataType.Block do
   alias __MODULE__
   use Blockchain
 
-  defstruct([:data, :timestamp, :prev_hash, :hash])
+  defstruct([:data, :timestamp, :prev_hash, :hash, :nonce])
   @doc """
   Build a new block for given data and previous hash
 
   ## Examples
     iex> zero = Blockchain.DataType.Block.zero()
     iex> %{data: data_string, prev_hash: prev_hash_string} = Blockchain.DataType.Block.new("hi there", zero.hash)
-    iex> data_string 
+    iex> data_string
     "hi there"
     iex> prev_hash_string
     zero.hash
@@ -26,10 +26,10 @@ defmodule Blockchain.DataType.Block do
 
   @doc """
   Build the initial block of the chain
-  
+
   ## Examples
     iex> %{data: data_string, hash: hash_string} = Blockchain.DataType.Block.zero
-    iex> data_string 
+    iex> data_string
     "ZERO_DATA"
     iex> hash_string
     "ZERO_HASH"
@@ -39,6 +39,7 @@ defmodule Blockchain.DataType.Block do
     %Block{
       data: "ZERO_DATA",
       hash: "ZERO_HASH",
+      nonce: 1,
       prev_hash: nil,
       timestamp: NaiveDateTime.utc_now()
     }
@@ -79,11 +80,12 @@ defmodule Blockchain.DataType.Block do
   @spec block_core(block) :: %{}
   defp block_core(%Block{} = block) do
     block
-    |> Map.take([:data, :prev_hash, :timestamp])
+    |> Map.take([:data, :prev_hash, :timestamp, :nonce])
   end
 
+  # Proof of Work
   @spec compute_hash(block) :: String.t
   defp compute_hash(block) do
-    Crypto.hash(block)
+    "on development"
   end
 end

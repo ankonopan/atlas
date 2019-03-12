@@ -12,7 +12,6 @@ defmodule Blockchain do
   defmacro __using__(_params) do
     quote do
       alias Blockchain.DataType, as: Type
-      alias Blockchain.{Crypto}
 
       @type block :: Type.Block
       @type chain :: Type.Chain
